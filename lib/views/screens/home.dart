@@ -36,8 +36,15 @@ class Home extends StatelessWidget {
             ),
             SizedBox(height: height * 0.05),
             data.isEmpty
-                ? Image.asset('assets/no.png')
-                : Expanded(child: ListView()),
+                ? Expanded(child: Image.asset('assets/no.png'))
+                : Expanded(
+                    child: ListView(
+                      children: data
+                          .map((e) => Container(
+                              height: 300, color: Colors.amber, child: Text(e)))
+                          .toList(),
+                    ),
+                  ),
           ],
         ),
       ),
