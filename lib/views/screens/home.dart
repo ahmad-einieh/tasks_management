@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../styles.dart';
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -23,9 +25,9 @@ class Home extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: height * 0.05),
-            Text(
+            const Text(
               "Your Tasks",
-              style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
             ),
             // SizedBox(height: height * 0.3),
             Divider(
@@ -34,7 +36,48 @@ class Home extends StatelessWidget {
               indent: width * 0.05,
               endIndent: width * 0.05,
             ),
-            SizedBox(height: height * 0.05),
+            data.isNotEmpty
+                ? SizedBox(
+                    height: height * 0.075,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: SizedBox(
+                            height: double.infinity,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Current",
+                                style: tab_text_style,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: SizedBox(
+                            height: double.infinity,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: Text("Completed", style: tab_text_style),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: SizedBox(
+                            height: double.infinity,
+                            child: TextButton(
+                              onPressed: () {},
+                              child:
+                                  Text("Not Completed", style: tab_text_style),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : const SizedBox(),
             data.isEmpty
                 ? Expanded(child: Image.asset('assets/no.png'))
                 : Expanded(
