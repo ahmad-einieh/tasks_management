@@ -1,3 +1,8 @@
+// To parse this JSON data, do
+//
+//     final task = taskFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 Task taskFromJson(String str) => Task.fromJson(json.decode(str));
@@ -9,7 +14,7 @@ class Task {
   final String title;
   final String description;
   final bool isComplete;
-  final String userId;
+  final List<String> userId;
   final int createdAt;
   final int endAt;
 
@@ -28,7 +33,7 @@ class Task {
         title: json["title"],
         description: json["description"],
         isComplete: json["isComplete"],
-        userId: json["userId"],
+        userId: List<String>.from(json["userId"].map((x) => x)),
         createdAt: json["created_at"],
         endAt: json["end_at"],
       );
@@ -38,7 +43,7 @@ class Task {
         "title": title,
         "description": description,
         "isComplete": isComplete,
-        "userId": userId,
+        "userId": List<dynamic>.from(userId.map((x) => x)),
         "created_at": createdAt,
         "end_at": endAt,
       };
