@@ -88,6 +88,5 @@ class Register extends StatelessWidget {
         ),
       ),
     );
-    ;
   }
 }

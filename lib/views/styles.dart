@@ -1,3 +1,3 @@
 import 'package:flutter/material.dart';
 
-var tab_text_style = TextStyle(color: Colors.black, fontSize: 16.0);
+var tabTextStyle = const TextStyle(color: Colors.black, fontSize: 16.0);

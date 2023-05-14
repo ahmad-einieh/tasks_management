@@ -23,9 +23,9 @@ createTask({
     'title': title,
     'description': description,
     'isComplete': false,
-    'userId': userId,
+    'userId': [userId],
     'created_at': createdAt,
-    'end_at': endAt,
+    'end_at': endAt
   });
 
   var response = await http.post(url, headers: headers, body: body);

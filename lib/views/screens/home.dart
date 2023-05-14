@@ -50,7 +50,7 @@ class Home extends StatelessWidget {
                               onPressed: () {},
                               child: Text(
                                 "Current",
-                                style: tab_text_style,
+                                style: tabTextStyle,
                               ),
                             ),
                           ),
@@ -60,7 +60,7 @@ class Home extends StatelessWidget {
                             height: double.infinity,
                             child: TextButton(
                               onPressed: () {},
-                              child: Text("Completed", style: tab_text_style),
+                              child: Text("Completed", style: tabTextStyle),
                             ),
                           ),
                         ),
@@ -69,8 +69,7 @@ class Home extends StatelessWidget {
                             height: double.infinity,
                             child: TextButton(
                               onPressed: () {},
-                              child:
-                                  Text("Not Completed", style: tab_text_style),
+                              child: Text("Not Completed", style: tabTextStyle),
                             ),
                           ),
                         ),

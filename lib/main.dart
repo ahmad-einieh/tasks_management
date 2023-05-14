@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:tasks_management/views/screens/home.dart';
-import 'package:tasks_management/views/screens/login.dart';
-import 'package:tasks_management/views/screens/register.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
