@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 import 'package:tasks_management/controllers/all_tasks_ctr.dart';
 
+import '../../controllers/backend/delete_task.dart';
+import '../../controllers/backend/update_complete_task.dart';
 import '../../controllers/is_complete_ctr.dart';
 import '../styles.dart';
 import '../widgets/bottom_sheet.dart';
@@ -79,19 +82,67 @@ class Home extends StatelessWidget {
                                 p0.isComplete ==
                                 isCompleteCTRl.isComplete.value)
                             .map(
-                              (e) => Card(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                              (e) => Slidable(
+                                startActionPane: ActionPane(
+                                  motion: const ScrollMotion(),
+                                  dismissible:
+                                      DismissiblePane(onDismissed: () {}),
+                                  children: [
+                                    SlidableAction(
+                                      onPressed: (s) {
+                                        deleteTask(e.id);
+                                        allTaskCTRl.setAllTask();
+                                      },
+                                      backgroundColor: const Color(0xFFFE4A49),
+                                      foregroundColor: Colors.white,
+                                      icon: Icons.delete,
+                                      label: 'Delete',
+                                    ),
+                                  ],
                                 ),
-                                elevation: 2.0,
-                                child: Container(
-                                  padding: const EdgeInsets.all(16.0),
+                                endActionPane: ActionPane(
+                                  motion: const DrawerMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      onPressed: (s) {
+                                        if (isCompleteCTRl.isComplete.value) {
+                                          updateTaskComplete(e.id, false);
+                                        } else {
+                                          updateTaskComplete(e.id, true);
+                                        }
+                                        allTaskCTRl.setAllTask();
+                                        DateTime.now().timeZoneOffset;
+                                      },
+                                      backgroundColor:
+                                          isCompleteCTRl.isComplete.value
+                                              ? const Color(0xFF21B7CA)
+                                              : const Color(0xFF7BC043),
+                                      foregroundColor: Colors.white,
+                                      icon: Icons.done,
+                                      label: isCompleteCTRl.isComplete.value
+                                          ? 'Not Complete'
+                                          : 'Complete',
+                                    ),
+                                  ],
+                                ),
+                                child: SizedBox(
                                   height: height * 0.1,
-                                  child: Text(
-                                    e.title,
-                                    style: const TextStyle(
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold,
+                                  width: double.infinity,
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    elevation: 2.0,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(16.0),
+                                      height: height * 0.1,
+                                      child: Text(
+                                        e.title,
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
