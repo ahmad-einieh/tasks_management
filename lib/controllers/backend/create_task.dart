@@ -33,7 +33,6 @@ Future<bool> createTask({
   if (response.statusCode == 200) {
     return true;
   } else {
-    print(response.statusCode);
     return false;
   }
 }

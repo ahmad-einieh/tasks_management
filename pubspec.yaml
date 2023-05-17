@@ -13,6 +13,7 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.1.1
   http: ^0.13.6
+  intl: ^0.18.1
   scroll_date_picker: ^3.7.0
 
 dev_dependencies:

@@ -20,7 +20,7 @@ class MainApp extends StatelessWidget {
     var userId = box.read("userId");
 
     return GetMaterialApp(
-      home: userId != null ? const Home() : Login(),
+      home: userId != null ? Home() : Login(),
       debugShowCheckedModeBanner: false,
     );
   }

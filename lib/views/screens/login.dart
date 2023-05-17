@@ -97,7 +97,7 @@ class Login extends StatelessWidget {
                     Get.snackbar("Error", "Please fill all the fields");
                     return;
                   }
-                  Get.offAll(() => const Home());
+                  Get.offAll(() => Home());
                 },
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(

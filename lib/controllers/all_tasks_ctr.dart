@@ -19,6 +19,5 @@ class AllTaskCTR extends GetxController {
     } catch (e) {
       allTask.value = temp;
     }
-    print(allTask.value.length);
   }
 }

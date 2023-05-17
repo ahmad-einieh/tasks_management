@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:tasks_management/controllers/all_tasks_ctr.dart';
 
 import '../../controllers/backend/delete_task.dart';
@@ -10,7 +11,20 @@ import '../styles.dart';
 import '../widgets/bottom_sheet.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  Home({super.key});
+  List<Color> beautifulColors = [
+    Colors.blue,
+    Colors.green,
+    Colors.yellow,
+    Colors.orange,
+    Colors.purple,
+    Colors.pink,
+    Colors.teal,
+    Colors.cyan,
+    Colors.indigo,
+    Colors.amber,
+    Colors.brown,
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +86,10 @@ class Home extends StatelessWidget {
           SizedBox(height: height * 0.025),
           Obx(
             () => allTaskCTRl.allTask.isEmpty
-                ? Expanded(child: Image.asset('assets/no.png'))
+                ? Expanded(
+                    child: InkWell(
+                        onTap: () => allTaskCTRl.setAllTask(),
+                        child: Image.asset('assets/no.png')))
                 : Expanded(
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -111,7 +128,6 @@ class Home extends StatelessWidget {
                                           updateTaskComplete(e.id, true);
                                         }
                                         allTaskCTRl.setAllTask();
-                                        DateTime.now().timeZoneOffset;
                                       },
                                       backgroundColor:
                                           isCompleteCTRl.isComplete.value
@@ -126,7 +142,7 @@ class Home extends StatelessWidget {
                                   ],
                                 ),
                                 child: SizedBox(
-                                  height: height * 0.1,
+                                  height: height * 0.15,
                                   width: double.infinity,
                                   child: Card(
                                     shape: RoundedRectangleBorder(
@@ -135,13 +151,45 @@ class Home extends StatelessWidget {
                                     elevation: 2.0,
                                     child: Container(
                                       padding: const EdgeInsets.all(16.0),
-                                      height: height * 0.1,
-                                      child: Text(
-                                        e.title,
-                                        style: const TextStyle(
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                      height: height * 0.15,
+                                      color: beautifulColors[
+                                          allTaskCTRl.allTask.indexOf(e) %
+                                              beautifulColors.length],
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            e.title,
+                                            style: const TextStyle(
+                                              fontSize: 24.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          // const SizedBox(height: 8.0),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                DateFormat('yyyy-MM-dd').format(
+                                                  DateTime
+                                                      .fromMillisecondsSinceEpoch(
+                                                    e.endAt.toInt(),
+                                                  ),
+                                                ),
+                                                style: const TextStyle(
+                                                    fontSize: 16.0),
+                                              ),
+                                              SizedBox(width: width * 0.5),
+                                              Text(
+                                                "${DateTime.fromMillisecondsSinceEpoch(
+                                                  e.endAt.toInt(),
+                                                ).difference(DateTime.now()).inDays} days",
+                                                style: const TextStyle(
+                                                    fontSize: 16.0),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
