@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasks_management/controllers/all_tasks_ctr.dart';
 
+import '../../controllers/is_complete_ctr.dart';
 import '../styles.dart';
 import '../widgets/bottom_sheet.dart';
 
@@ -13,6 +14,7 @@ class Home extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     var height = MediaQuery.of(context).size.height;
     AllTaskCTR allTaskCTRl = Get.put(AllTaskCTR());
+    IsCompleteCTR isCompleteCTRl = Get.put(IsCompleteCTR());
 
     return Scaffold(
       body: Center(
@@ -23,7 +25,6 @@ class Home extends StatelessWidget {
             "Your Tasks",
             style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
           ),
-          // SizedBox(height: height * 0.3),
           Divider(
             thickness: 1.0,
             color: Colors.black,
@@ -31,7 +32,7 @@ class Home extends StatelessWidget {
             endIndent: width * 0.05,
           ),
           Obx(
-            () => allTaskCTRl.allTask.isEmpty
+            () => allTaskCTRl.allTask.isNotEmpty
                 ? SizedBox(
                     height: height * 0.075,
                     child: Row(
@@ -42,7 +43,9 @@ class Home extends StatelessWidget {
                           child: SizedBox(
                             height: double.infinity,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                isCompleteCTRl.setIsComplete(false);
+                              },
                               child: Text("Not Completed", style: tabTextStyle),
                             ),
                           ),
@@ -51,7 +54,9 @@ class Home extends StatelessWidget {
                           child: SizedBox(
                             height: double.infinity,
                             child: TextButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                isCompleteCTRl.setIsComplete(true);
+                              },
                               child: Text("Completed", style: tabTextStyle),
                             ),
                           ),
@@ -61,7 +66,6 @@ class Home extends StatelessWidget {
                   )
                 : const SizedBox(),
           ),
-
           SizedBox(height: height * 0.025),
           Obx(
             () => allTaskCTRl.allTask.isEmpty
@@ -71,16 +75,18 @@ class Home extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 12.0),
                       child: ListView(
                         children: allTaskCTRl.allTask
+                            .where((p0) =>
+                                p0.isComplete ==
+                                isCompleteCTRl.isComplete.value)
                             .map(
                               (e) => Card(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                elevation: 4.0, // Adds a shadow to the card
+                                elevation: 2.0,
                                 child: Container(
                                   padding: const EdgeInsets.all(16.0),
-                                  height: height *
-                                      0.1, // Adjust the padding as needed
+                                  height: height * 0.1,
                                   child: Text(
                                     e.title,
                                     style: const TextStyle(

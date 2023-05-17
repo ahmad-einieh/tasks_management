@@ -7,14 +7,12 @@ environment:
   sdk: '>=2.19.6 <3.0.0'
 
 dependencies:
-  bottom_sheet: ^3.1.2
   flutter:
     sdk: flutter
   get: ^4.6.5
   get_storage: ^2.1.1
   http: ^0.13.6
   scroll_date_picker: ^3.7.0
-  syncfusion_flutter_datepicker: ^21.2.4
 
 dev_dependencies:
   flutter_test:
