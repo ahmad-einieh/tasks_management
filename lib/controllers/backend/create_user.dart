@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:tasks_management/other/constant.dart';
 
-createUser(
+Future<bool> createUser(
     {required String name,
     required String email,
     required String password,

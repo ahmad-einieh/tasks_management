@@ -4,14 +4,20 @@ Task taskFromJson(String str) => Task.fromJson(json.decode(str));
 
 String taskToJson(Task data) => json.encode(data.toJson());
 
+List<Task> allTaskFromJson(String str) =>
+    List<Task>.from(json.decode(str).map((x) => Task.fromJson(x)));
+
+String allTaskToJson(List<Task> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class Task {
-  final String id;
-  final String title;
-  final String description;
+  final String? id;
+  final String? title;
+  final String? description;
   final bool isComplete;
-  final List<String> userId;
-  final int createdAt;
-  final int endAt;
+  final List<String?> userId;
+  final num createdAt;
+  final num endAt;
 
   Task({
     required this.id,

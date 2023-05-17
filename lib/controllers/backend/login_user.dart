@@ -3,7 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:tasks_management/models/user.dart';
 import 'package:tasks_management/other/constant.dart';
 
-loginUser({required String email, required String password}) async {
+Future<User?>? loginUser(
+    {required String email, required String password}) async {
   var url = Uri.parse('$backendLink/auth/login');
   var headers = {
     'accept': 'application/json',

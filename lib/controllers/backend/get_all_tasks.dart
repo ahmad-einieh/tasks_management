@@ -1,9 +1,14 @@
-import 'dart:convert';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 import 'package:tasks_management/models/task.dart';
 import 'package:tasks_management/other/constant.dart';
 
-getAllTasks(String userId) async {
+getAllTasks() async {
+  var box = GetStorage();
+  var userId = box.read('userId');
+  if (userId == null) {
+    return null;
+  }
   var url = Uri.parse('$backendLink/task/get_all_tasks?userId=$userId');
   var headers = {
     'accept': 'application/json',
@@ -12,12 +17,7 @@ getAllTasks(String userId) async {
   var response = await http.get(url, headers: headers);
 
   if (response.statusCode == 200) {
-    var data = json.decode(response.body);
-    var tasks = [];
-
-    for (var item in data) {
-      tasks.add(taskFromJson(item));
-    }
+    List<Task> tasks = allTaskFromJson(response.body);
 
     return tasks;
   } else {
