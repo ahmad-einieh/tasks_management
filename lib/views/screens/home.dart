@@ -141,56 +141,52 @@ class Home extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                child: SizedBox(
-                                  height: height * 0.15,
-                                  width: double.infinity,
-                                  child: Card(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8.0),
-                                    ),
-                                    elevation: 2.0,
-                                    child: Container(
-                                      padding: const EdgeInsets.all(16.0),
-                                      height: height * 0.15,
-                                      color: beautifulColors[
-                                          allTaskCTRl.allTask.indexOf(e) %
-                                              beautifulColors.length],
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            e.title,
-                                            style: const TextStyle(
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                child: Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                  elevation: 2.0,
+                                  child: Container(
+                                    padding: const EdgeInsets.all(16.0),
+                                    height: height * 0.11,
+                                    color: beautifulColors[
+                                        allTaskCTRl.allTask.indexOf(e) %
+                                            beautifulColors.length],
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          e.title,
+                                          style: const TextStyle(
+                                            fontSize: 24.0,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          // const SizedBox(height: 8.0),
-                                          Row(
-                                            children: [
-                                              Text(
-                                                DateFormat('yyyy-MM-dd').format(
-                                                  DateTime
-                                                      .fromMillisecondsSinceEpoch(
-                                                    e.endAt.toInt(),
-                                                  ),
-                                                ),
-                                                style: const TextStyle(
-                                                    fontSize: 16.0),
-                                              ),
-                                              SizedBox(width: width * 0.5),
-                                              Text(
-                                                "${DateTime.fromMillisecondsSinceEpoch(
+                                        ),
+                                        // const SizedBox(height: 8.0),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              DateFormat('yyyy-MM-dd').format(
+                                                DateTime
+                                                    .fromMillisecondsSinceEpoch(
                                                   e.endAt.toInt(),
-                                                ).difference(DateTime.now()).inDays} days",
-                                                style: const TextStyle(
-                                                    fontSize: 16.0),
+                                                ),
                                               ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                              style: const TextStyle(
+                                                  fontSize: 16.0),
+                                            ),
+                                            SizedBox(width: width * 0.5),
+                                            Text(
+                                              "${DateTime.fromMillisecondsSinceEpoch(
+                                                e.endAt.toInt(),
+                                              ).difference(DateTime.now()).inDays} days",
+                                              style: const TextStyle(
+                                                  fontSize: 16.0),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),
