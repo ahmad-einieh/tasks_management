@@ -176,6 +176,8 @@ class Home extends StatelessWidget {
                                           ),
                                           // const SizedBox(height: 8.0),
                                           Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Text(
                                                 DateFormat('yyyy-MM-dd').format(
@@ -187,7 +189,7 @@ class Home extends StatelessWidget {
                                                 style: const TextStyle(
                                                     fontSize: 16.0),
                                               ),
-                                              SizedBox(width: width * 0.5),
+                                              // SizedBox(width: width * 0.2),
                                               Text(
                                                 "${DateTime.fromMillisecondsSinceEpoch(
                                                   e.endAt.toInt(),
