@@ -9,6 +9,7 @@ import '../../controllers/backend/update_complete_task.dart';
 import '../../controllers/is_complete_ctr.dart';
 import '../styles.dart';
 import '../widgets/bottom_sheet.dart';
+import '../widgets/custom_dialog.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -99,94 +100,100 @@ class Home extends StatelessWidget {
                                 p0.isComplete ==
                                 isCompleteCTRl.isComplete.value)
                             .map(
-                              (e) => Slidable(
-                                startActionPane: ActionPane(
-                                  motion: const ScrollMotion(),
-                                  dismissible:
-                                      DismissiblePane(onDismissed: () {}),
-                                  children: [
-                                    SlidableAction(
-                                      onPressed: (s) {
-                                        deleteTask(e.id);
-                                        allTaskCTRl.setAllTask();
-                                      },
-                                      backgroundColor: const Color(0xFFFE4A49),
-                                      foregroundColor: Colors.white,
-                                      icon: Icons.delete,
-                                      label: 'Delete',
-                                    ),
-                                  ],
-                                ),
-                                endActionPane: ActionPane(
-                                  motion: const DrawerMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      onPressed: (s) {
-                                        if (isCompleteCTRl.isComplete.value) {
-                                          updateTaskComplete(e.id, false);
-                                        } else {
-                                          updateTaskComplete(e.id, true);
-                                        }
-                                        allTaskCTRl.setAllTask();
-                                      },
-                                      backgroundColor:
-                                          isCompleteCTRl.isComplete.value
-                                              ? const Color(0xFF21B7CA)
-                                              : const Color(0xFF7BC043),
-                                      foregroundColor: Colors.white,
-                                      icon: Icons.done,
-                                      label: isCompleteCTRl.isComplete.value
-                                          ? 'Not Complete'
-                                          : 'Complete',
-                                    ),
-                                  ],
-                                ),
-                                child: Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
+                              (e) => InkWell(
+                                onTap: () {
+                                  customDialog(e.title, e.description, e.id);
+                                },
+                                child: Slidable(
+                                  startActionPane: ActionPane(
+                                    motion: const ScrollMotion(),
+                                    dismissible:
+                                        DismissiblePane(onDismissed: () {}),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (s) {
+                                          deleteTask(e.id);
+                                          allTaskCTRl.setAllTask();
+                                        },
+                                        backgroundColor:
+                                            const Color(0xFFFE4A49),
+                                        foregroundColor: Colors.white,
+                                        icon: Icons.delete,
+                                        label: 'Delete',
+                                      ),
+                                    ],
                                   ),
-                                  elevation: 2.0,
-                                  child: Container(
-                                    padding: const EdgeInsets.all(16.0),
-                                    height: height * 0.11,
-                                    color: beautifulColors[
-                                        allTaskCTRl.allTask.indexOf(e) %
-                                            beautifulColors.length],
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          e.title,
-                                          style: const TextStyle(
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.bold,
+                                  endActionPane: ActionPane(
+                                    motion: const DrawerMotion(),
+                                    children: [
+                                      SlidableAction(
+                                        onPressed: (s) {
+                                          if (isCompleteCTRl.isComplete.value) {
+                                            updateTaskComplete(e.id, false);
+                                          } else {
+                                            updateTaskComplete(e.id, true);
+                                          }
+                                          allTaskCTRl.setAllTask();
+                                        },
+                                        backgroundColor:
+                                            isCompleteCTRl.isComplete.value
+                                                ? const Color(0xFF21B7CA)
+                                                : const Color(0xFF7BC043),
+                                        foregroundColor: Colors.white,
+                                        icon: Icons.done,
+                                        label: isCompleteCTRl.isComplete.value
+                                            ? 'Not Complete'
+                                            : 'Complete',
+                                      ),
+                                    ],
+                                  ),
+                                  child: Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    elevation: 2.0,
+                                    child: Container(
+                                      padding: const EdgeInsets.all(16.0),
+                                      height: height * 0.16,
+                                      color: beautifulColors[
+                                          allTaskCTRl.allTask.indexOf(e) %
+                                              beautifulColors.length],
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            e.title,
+                                            style: const TextStyle(
+                                              fontSize: 24.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                        // const SizedBox(height: 8.0),
-                                        Row(
-                                          children: [
-                                            Text(
-                                              DateFormat('yyyy-MM-dd').format(
-                                                DateTime
-                                                    .fromMillisecondsSinceEpoch(
-                                                  e.endAt.toInt(),
+                                          // const SizedBox(height: 8.0),
+                                          Row(
+                                            children: [
+                                              Text(
+                                                DateFormat('yyyy-MM-dd').format(
+                                                  DateTime
+                                                      .fromMillisecondsSinceEpoch(
+                                                    e.endAt.toInt(),
+                                                  ),
                                                 ),
+                                                style: const TextStyle(
+                                                    fontSize: 16.0),
                                               ),
-                                              style: const TextStyle(
-                                                  fontSize: 16.0),
-                                            ),
-                                            SizedBox(width: width * 0.5),
-                                            Text(
-                                              "${DateTime.fromMillisecondsSinceEpoch(
-                                                e.endAt.toInt(),
-                                              ).difference(DateTime.now()).inDays} days",
-                                              style: const TextStyle(
-                                                  fontSize: 16.0),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                              SizedBox(width: width * 0.5),
+                                              Text(
+                                                "${DateTime.fromMillisecondsSinceEpoch(
+                                                  e.endAt.toInt(),
+                                                ).difference(DateTime.now()).inDays} days",
+                                                style: const TextStyle(
+                                                    fontSize: 16.0),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
