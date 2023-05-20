@@ -102,7 +102,12 @@ class Home extends StatelessWidget {
                             .map(
                               (e) => InkWell(
                                 onTap: () {
-                                  customDialog(e.title, e.description, e.id);
+                                  customDialog(
+                                      e.title,
+                                      e.description,
+                                      e.id,
+                                      isCompleteCTRl.isComplete.value,
+                                      allTaskCTRl);
                                 },
                                 child: Slidable(
                                   startActionPane: ActionPane(
