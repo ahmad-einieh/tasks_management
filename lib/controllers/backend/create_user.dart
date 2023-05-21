@@ -21,7 +21,6 @@ Future<bool> createUser(
   });
 
   var response = await http.post(url, headers: headers, body: body);
-
   if (response.statusCode == 200) {
     return true;
   } else {

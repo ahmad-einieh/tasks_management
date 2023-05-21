@@ -161,11 +161,14 @@ class Home extends StatelessWidget {
                                       padding: const EdgeInsets.all(16.0),
                                       height: height * 0.16,
                                       color: beautifulColors[
-                                          allTaskCTRl.allTask.indexOf(e) %
-                                              beautifulColors.length],
+                                              allTaskCTRl.allTask.indexOf(e) %
+                                                  beautifulColors.length]
+                                          .withOpacity(0.5),
                                       child: Column(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             e.title,
@@ -214,15 +217,18 @@ class Home extends StatelessWidget {
         ],
       )),
       floatingActionButton: FloatingActionButton(
-          onPressed: () => showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (s) {
-                return ButtomSheet(
-                  width: width,
-                  allTaskCTRl: allTaskCTRl,
-                );
-              }),
+          onPressed: () {
+            // showModalBottomSheet(
+            //     context: context,
+            //     isScrollControlled: true,
+            //     builder: (s) {
+            //       return ButtomSheet(
+            //         width: width,
+            //         allTaskCTRl: allTaskCTRl,
+            //       );
+            //     });
+            ButtomSheet.show(context, width, allTaskCTRl);
+          },
           child: const Icon(Icons.add)),
     );
   }

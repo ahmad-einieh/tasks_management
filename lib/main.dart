@@ -5,8 +5,8 @@ import 'package:tasks_management/views/screens/home.dart';
 import 'package:tasks_management/views/screens/login.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   GetStorage.init();
+  WidgetsFlutterBinding.ensureInitialized();
   // GetStorage().erase();
   runApp(const MainApp());
 }

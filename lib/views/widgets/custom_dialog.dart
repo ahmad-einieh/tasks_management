@@ -65,106 +65,125 @@ customDialog(String title, String content, String taskId, bool isComplete,
         ],
       ),
       actions: [
-        TextButton(
-          onPressed: () async {
-            bool isAdded = await addUserToTask(taskId, _emailController.text);
-            if (isAdded) {
-              Get.snackbar(
-                'Done',
-                'User added successfully',
-                backgroundColor: Colors.green,
-                colorText: Colors.white,
-              );
-              await Future.delayed(const Duration(seconds: 4));
-              Get.back();
-            } else {
-              Get.snackbar(
-                'Error',
-                'User not found',
-                backgroundColor: Colors.red,
-                colorText: Colors.white,
-              );
-            }
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.blue,
-            ),
-            child: const Text(
-              'Add User',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.white,
+        Row(
+          mainAxisAlignment: isComplete
+              ? MainAxisAlignment.center
+              : MainAxisAlignment.spaceBetween,
+          children: [
+            isComplete
+                ? const SizedBox()
+                : TextButton(
+                    onPressed: () async {
+                      bool isAdded =
+                          await addUserToTask(taskId, _emailController.text);
+                      if (isAdded) {
+                        Get.snackbar(
+                          'Done',
+                          'User added successfully',
+                          backgroundColor: Colors.green,
+                          colorText: Colors.white,
+                        );
+                        await Future.delayed(const Duration(seconds: 4));
+                        Get.back();
+                      } else {
+                        Get.snackbar(
+                          'Error',
+                          'User not found',
+                          backgroundColor: Colors.red,
+                          colorText: Colors.white,
+                        );
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10, horizontal: 16),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.blue,
+                      ),
+                      child: const Text(
+                        'Add User',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+            TextButton(
+              onPressed: () {
+                updateTaskComplete(taskId, !isComplete);
+                allTaskCTRl.setAllTask();
+                Get.back();
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.green,
+                ),
+                child: Text(
+                  isComplete ? 'Not Complete' : 'Complete',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
-          ),
+          ],
         ),
-        TextButton(
-          onPressed: () {
-            updateTaskComplete(taskId, !isComplete);
-            allTaskCTRl.setAllTask();
-            Get.back();
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.green,
-            ),
-            child: Text(
-              isComplete ? 'Not Complete' : 'Complete',
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.white,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextButton(
+              onPressed: () {
+                deleteTask(taskId);
+                allTaskCTRl.setAllTask();
+                Get.back();
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.red,
+                ),
+                child: const Text(
+                  'Delete',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            deleteTask(taskId);
-            allTaskCTRl.setAllTask();
-            Get.back();
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.red,
-            ),
-            child: const Text(
-              'Delete',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.white,
+            TextButton(
+              onPressed: () {
+                Get.back();
+              },
+              child: Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[300],
+                ),
+                child: const Text(
+                  'Close',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.black87,
+                  ),
+                ),
               ),
             ),
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            Get.back();
-          },
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: Colors.grey[300],
-            ),
-            child: const Text(
-              'Close',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-                color: Colors.black87,
-              ),
-            ),
-          ),
+          ],
         ),
       ],
       shape: RoundedRectangleBorder(
