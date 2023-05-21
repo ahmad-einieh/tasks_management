@@ -7,25 +7,13 @@ import 'package:tasks_management/controllers/all_tasks_ctr.dart';
 import '../../controllers/backend/delete_task.dart';
 import '../../controllers/backend/update_complete_task.dart';
 import '../../controllers/is_complete_ctr.dart';
+import '../../other/constant.dart';
 import '../styles.dart';
 import '../widgets/bottom_sheet.dart';
 import '../widgets/custom_dialog.dart';
 
 class Home extends StatelessWidget {
-  Home({super.key});
-  List<Color> beautifulColors = [
-    Colors.blue,
-    Colors.green,
-    Colors.yellow,
-    Colors.orange,
-    Colors.purple,
-    Colors.pink,
-    Colors.teal,
-    Colors.cyan,
-    Colors.indigo,
-    Colors.amber,
-    Colors.brown,
-  ];
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -218,15 +206,6 @@ class Home extends StatelessWidget {
       )),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            // showModalBottomSheet(
-            //     context: context,
-            //     isScrollControlled: true,
-            //     builder: (s) {
-            //       return ButtomSheet(
-            //         width: width,
-            //         allTaskCTRl: allTaskCTRl,
-            //       );
-            //     });
             ButtomSheet.show(context, width, allTaskCTRl);
           },
           child: const Icon(Icons.add)),
